@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image, Alert } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { View, Text, SafeAreaView, Alert, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from "../config/firebase";
+import Input from '../components/Input';  // Asegúrate de que la ruta sea correcta
+import Button from '../components/Button';  // Asegúrate de que la ruta sea correcta
 
 const Registro = ({ navigation }) => {
     const [email, setEmail] = useState("");
@@ -43,39 +44,33 @@ const Registro = ({ navigation }) => {
                 />
             </View>
             <Text style={styles.welcomeText}>Regístrate</Text>
-            <TextInput
-                style={styles.input}
+            <Input
                 placeholder="Nombre"
                 value={name}
                 onChangeText={setName}
-                autoCapitalize="none"
             />
-            <TextInput
-                style={styles.input}
+            <Input
                 placeholder="Apellido"
                 value={lastName}
                 onChangeText={setLastName}
-                autoCapitalize="none"
             />
-            <TextInput
-                style={styles.input}
+            <Input
                 placeholder="Email"
                 keyboardType="email-address"
                 value={email}
                 onChangeText={setEmail}
-                autoCapitalize="none"
             />
-            <TextInput
-                style={styles.input}
+            <Input
                 placeholder="Contraseña"
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
-                autoCapitalize="none"
             />
-            <TouchableOpacity style={styles.RegistroButton} onPress={handleSignIn}>
-                <Text style={styles.RegistroButtonText}>REGISTRARSE</Text>
-            </TouchableOpacity>
+            <Button
+                onPress={handleSignIn}
+                title="REGISTRARSE"
+                style={styles.RegistroButton}
+            />
             <TouchableOpacity onPress={irLogin}>
                 <Text style={styles.loginText}>
                     ¿Ya tienes una cuenta? <Text style={styles.loginLink}>Inicia sesión</Text>
@@ -107,28 +102,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#4294FF',
     },
-    input: {
-        width: '100%',
-        height: 50,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 8,
-        paddingHorizontal: 10,
-        marginBottom: 15,
-    },
     RegistroButton: {
-        width: '100%',
-        height: 50,
-        backgroundColor: '#4294FF',
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
         marginBottom: 20,
-    },
-    RegistroButtonText: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
     },
     loginText: {
         color: '#888',

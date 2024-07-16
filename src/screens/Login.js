@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image, Alert } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from "../config/firebase"; // Importar la instancia de app de firebase.js
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");
@@ -42,23 +44,21 @@ const Login = ({ navigation }) => {
                 />
             </View>
             <Text style={styles.welcomeText}>Bienvenido</Text>
-            <TextInput
-                style={styles.input}
+            <Input
+                value={email}
                 onChangeText={setEmail}
                 placeholder="Email"
-                keyboardType="email-address"
-                autoCapitalize="none"
             />
-            <TextInput
-                style={styles.input}
+            <Input
+                value={password}
                 onChangeText={setPassword}
                 placeholder="Password"
                 secureTextEntry
-                autoCapitalize="none"
             />
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                <Text style={styles.loginButtonText}>LOGIN</Text>
-            </TouchableOpacity>
+            <Button
+                onPress={handleLogin}
+                title="LOGIN"
+            />
             <TouchableOpacity onPress={irRegistrar}>
                 <Text style={styles.signupText}>
                     ¿No tienes una cuenta? <Text style={styles.signupLink}>Regístrate</Text>
